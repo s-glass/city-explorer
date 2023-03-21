@@ -42,12 +42,13 @@ class App extends React.Component{
     });
 
   }   catch(error){
-      console.log(error)
+      // console.log(error)
 
       this.setState({
         error: true,
         errorMessage: error.message
       });
+      console.log(error);
   }
 }
 
