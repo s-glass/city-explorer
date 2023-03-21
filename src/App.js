@@ -1,5 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Image from 'react-bootstrap/Image';
+import './App.css'
 
 
 class App extends React.Component{
@@ -8,6 +12,8 @@ class App extends React.Component{
     this.state = {
       pokemonData: [],
       city: '',
+      cityLat: '',
+      CityLon: '',
       cityData: {},
       error: false,
       errorMessage: ''
@@ -21,61 +27,55 @@ class App extends React.Component{
     })
   }
 
-  // ** async/await - handle our asynchronous code
-  // ** try/catch - handle our errors - try resolves successful promises and catch handles rejected promises
   getCityData = async (event) => {
     event.preventDefault();
 
     try {
-
-    // } catch(error){
-    //   // tell user there's an error, call axios possibly
-    // }
-
-    // TODO: Use axios to get the data from LocationIQ using city in state
     let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`
 
     let cityDataFromAxios = await axios.get(url);
-
     console.log(cityDataFromAxios.data[0]);
 
-    // TODO: Set state with the data that comes back from axios & set error boolean to false
     this.setState({
       cityData: cityDataFromAxios.data[0],
       error: false
     });
 
   }   catch(error){
+      console.log(error)
 
-      // TODO: set state with the error boolean and the error message
       this.setState({
         error: true,
         errorMessage: error.message
-      })
+      });
   }
 }
 
   // *** Map portion of the lab - img src points to this url:
-  //*** https://maps.locationiq.com/v3/staticmap?key=<YOUR API KEY>&center=<CITY LAT>,<CITY LON>>&zoom=13 */
+
 
 
   render(){
-    return(
+    return (
       <>
         <h1> API CALLS</h1>
 
-      <form onSubmit={this.getCityData}>
-        <label > Enter In A City:
-          <input type="text" onChange={this.handleCityInput}/>
-        </label>
-        <button type="submit">Explore!</button>
-      </form>
+      <Form onSubmit={this.getCityData}>
+        <Form.Label> Enter In A City:</Form.Label>
+          <Form.Control type="text" onChange={this.handleCityInput}/>
+        <Button variant="info" type="submit">Explore!</Button>
+      </Form>
       
             {/*ternary - wtf, if there's an error, show the error, if not, show the actual data from location IQ */}
       {
       this.state.error
       ? <p>{this.state.errorMessage}</p>
-      :<p>{this.state.cityData.display_name}{this.state.cityData.lat}{this.state.cityData.lon}</p>
+      : Object.keys(this.state.cityData).length > 0 &&
+      <ul>
+        <p>{this.state.cityData.display_name}{this.state.cityData.lat}{this.state.cityData.lon}</p>
+        <Image class="img-fluid" src = {`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat}${this.state.cityData.lon}&zoom=13`}/> 
+      </ul>
+
       }
 
       </>
