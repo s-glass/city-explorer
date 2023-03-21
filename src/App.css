@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(164, 238, 164);
+  background-color: rgb(164, 207, 239);
 }
 
 h1{
@@ -7,15 +7,18 @@ h1{
 }
 
 form{
-  text-align: left;
+  text-align: center;
 }
 
 p{
   text-align: center;
-  color: rgb(25, 47, 25)
+  color: rgb(9, 22, 78)
 }
 
 image{
-  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  display: block;
 }
 

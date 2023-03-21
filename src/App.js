@@ -72,7 +72,7 @@ class App extends React.Component{
       : Object.keys(this.state.cityData).length > 0 &&
       <ul>
         <p>{this.state.cityData.display_name}{this.state.cityData.lat}{this.state.cityData.lon}</p>
-        <Image class="img-fluid" src = {`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat}${this.state.cityData.lon}&zoom=13`} alt = 'Map of entered city'/> 
+        <Image class="img-fluid" src = {`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=13`} alt = 'Map of entered city'/> 
       </ul>
 
       }
