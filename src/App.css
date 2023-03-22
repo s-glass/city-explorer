@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(164, 207, 239);
+  background-color: rgb(164, 207, 239) !important;
 }
 
 h1{
@@ -12,7 +12,7 @@ form{
 
 p{
   text-align: center;
-  color: rgb(9, 22, 78)
+  color: rgb(9, 22, 78) !important;
 }
 
 image{
