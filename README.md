@@ -7,6 +7,7 @@
 Build a React applicaiton that uses the Axios library to make user-initiated requests for data from a third-party API.
 
 ![WRRC - backend to API](/WRRC1.png)
+![WRRC - backend to frontend](/WRRC%202.png)
 
 ## Getting Started
 - Create a project through React in terminal
@@ -24,7 +25,7 @@ Build a React applicaiton that uses the Axios library to make user-initiated req
 
 ## Change Log
 03/20/2023 9:59pm - Application can connect to LocationIQ to retrieve and display city name, lat, lon, and map. 
-3/21/2023 4:15pm - Bugs fixed after an issue with the key.
+3/21/2023 9:32pm - Application is connected to backend server and renders daily forecast data for a given city.
 
 ## Time Estimates
 
@@ -38,5 +39,17 @@ Finish time: 9:25pm
 
 Actual time needed to complete: 3 hours, 8 minutes
 
+----------------------------------------------
+
+Name of feature: #2 Conect to backend server and render daily weather information for user selected city
+
+Estimate of time needed to complete: All day long...probably 
+
+Start time: 3:30pm
+
+Finish time: 9:34pm
+
+Actual time needed to complete: 6 hours, 4 minutes
+
 ## Credit and Collaborations
-Teachers Audrey and David and TAs Tony and Justin
+Teachers Audrey and David and TAs Tony, Matt, Raul, and Justin
