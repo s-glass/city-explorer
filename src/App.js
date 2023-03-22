@@ -40,6 +40,11 @@ class App extends React.Component {
         error: false
       });
 
+      // TODO: call the weather handler
+      //let lat = cityDataFromAxios.data[0].lat
+      //let lon = cityDataFromAxios.data[0].lon
+      // this.handleGetWeather()
+
     } catch (error) {
 
       this.setState({
