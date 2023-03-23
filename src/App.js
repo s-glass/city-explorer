@@ -5,7 +5,7 @@ import axios from 'axios';
 import Image from 'react-bootstrap/Image';
 import './App.css';
 import Weather from "./Weather";
-// import Movies from "./Movies";
+import Movies from "./Movies";
 // import LatLon from "./LatLon";
 
 
@@ -25,15 +25,12 @@ class App extends React.Component {
     }
   }
 
-
- 
   getCityData = async () => {
 
     try {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`
 
       let cityDataFromAxios = await axios.get(url);
-      console.log(cityDataFromAxios.data[0]);
 
       this.setState({
         cityData: cityDataFromAxios.data[0],
@@ -44,10 +41,9 @@ class App extends React.Component {
       let lon = cityDataFromAxios.data[0].lon;
       this.handleWeather(lat, lon);
 
-
       this.getMovies();
-    } catch (error) {
 
+    } catch (error) {
       this.setState({
         error: true,
         errorMessage: error.message
@@ -60,6 +56,7 @@ class App extends React.Component {
 
     try {
       let url = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`
+      
       let weatherDataFromAxios = await axios.get(url);
 
       this.setState({
@@ -76,9 +73,11 @@ class App extends React.Component {
 
 
 
+
+
   getMovies = async () => {
     try {
-      let results = await axios.get(`${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.city}`);
+      let results = await axios.get(`${process.env.REACT_APP_SERVER}/movies?city_name=${this.state.city}`);
 
       this.setState({
         movieData: results.data,
@@ -112,10 +111,9 @@ class App extends React.Component {
 
 
   render() {
-    console.log(this.state);
     return (
       <>
-        <h1> API CALLS</h1>
+        <h1> Enter A City Name:</h1>
 
         {/* <Form onSubmit={this.getCityWeather}>
           <Form.Label> Enter In A City:</Form.Label>
@@ -124,27 +122,26 @@ class App extends React.Component {
         </Form> */}
 
         <form onSubmit={this.handleSubmit}>
-
           <input type="text" placeholder="city name" name="city"></input>
           <button type="submit">Explore!</button>
-
         </form>
 
 
         <Weather cityWeather={this.state.cityWeather} />
-        {/* <Movies movieData={this.state.movieData}/> */}
-
         {
           this.state.error
             ? <p>{this.state.errorMessage}</p>
+
             : Object.keys(this.state.cityData).length > 0 &&
-            <ul>
+           <ul>
               <p>{this.state.cityData.display_name}{this.state.cityData.lat}{this.state.cityData.lon}</p>
+
               <Image class="img-fluid" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=13`} alt='Map of entered city' />
-            </ul>
+
+          </ul>
 
         }
-
+              <Movies movieData={this.state.movieData}/>
       </>
     )
   }
