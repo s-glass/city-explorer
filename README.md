@@ -1,13 +1,12 @@
 # City Explorer
 
 **Author**: Sarah Glass
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 6.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
-Build a React applicaiton that uses the Axios library to make user-initiated requests for data from a third-party API.
+Build a React applicaiton that uses the Axios library to make user-initiated requests for data from three third-party APIs.
 
-![WRRC - backend to API](/WRRC1.png)
-![WRRC - backend to frontend](/WRRC%202.png)
+![WRRC](/WRRC3.png)
 
 ## Getting Started
 - Create a project through React in terminal
@@ -26,6 +25,7 @@ Build a React applicaiton that uses the Axios library to make user-initiated req
 ## Change Log
 03/20/2023 9:59pm - Application can connect to LocationIQ to retrieve and display city name, lat, lon, and map. 
 3/21/2023 9:32pm - Application is connected to backend server and renders daily forecast data for a given city.
+3/22/2023 856pm - Application renders weather and location information; still needs to display movie data.
 
 ## Time Estimates
 
@@ -52,4 +52,4 @@ Finish time: 9:34pm
 Actual time needed to complete: 6 hours, 4 minutes
 
 ## Credit and Collaborations
-Teachers Audrey and David and TAs Tony, Matt, Raul, and Justin
+Teachers Audrey and David and TAs Tony, Matt, Raul, and Justin.
