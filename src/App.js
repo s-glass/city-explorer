@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+// import Button from 'react-bootstrap/Button';
+// import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
 import './App.css';
 import Weather from "./Weather";
-import Movies from "./Movies";
-import LatLon from "./LatLon";
+// import Movies from "./Movies";
+// import LatLon from "./LatLon";
 
 
 class App extends React.Component {
