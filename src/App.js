@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+// import Button from 'react-bootstrap/Button';
+// import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
 import './App.css';
 import Weather from "./Weather";
+// import Movies from "./Movies";
+// import LatLon from "./LatLon";
 
 
 class App extends React.Component {
@@ -15,19 +17,17 @@ class App extends React.Component {
       cityData: {},
       cityWeather: [],
       error: false,
-      errorMessage: ''
+      errorMessage: '',
+      movieData: [],
+      showImages: false,
+      movieError: false,
+      movieErrorMessage: ''
     }
   }
 
 
-  handleCityInput = (event) => {
-    this.setState({
-      city: event.target.value
-    })
-  }
-
-  getCityData = async (event) => {
-    event.preventDefault();
+ 
+  getCityData = async () => {
 
     try {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`
@@ -37,9 +37,15 @@ class App extends React.Component {
 
       this.setState({
         cityData: cityDataFromAxios.data[0],
-        error: false
+        error: false,
       });
 
+      let lat = cityDataFromAxios.data[0].lat;
+      let lon = cityDataFromAxios.data[0].lon;
+      this.handleWeather(lat, lon);
+
+
+      this.getMovies();
     } catch (error) {
 
       this.setState({
@@ -50,44 +56,83 @@ class App extends React.Component {
   }
 
 
-
-  getCityWeather = async (event) => {
-    event.preventDefault();
+  handleWeather = async (lat, lon) => {
 
     try {
-      console.log(process.env.REACT_APP_SERVER);
-      let url = `${process.env.REACT_APP_SERVER}/weather?city=${this.state.city}`
-
-      let cityWeatherData = await axios.get(url);
-      console.log(cityWeatherData.data);
+      let url = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`
+      let weatherDataFromAxios = await axios.get(url);
 
       this.setState({
-        cityWeather: cityWeatherData.data,
-        error: false
+        cityWeather: weatherDataFromAxios.data
       });
 
     } catch (error) {
-
       this.setState({
         error: true,
-        errorMessage: error.message
+        errorMessage: error.message,
       });
     }
+  }
+
+
+
+  getMovies = async () => {
+    try {
+      let results = await axios.get(`${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.city}`);
+
+      this.setState({
+        movieData: results.data,
+        showImages: true,
+        movieError: false,
+        movieErrorMessage: ''
+      })
+
+    } catch (error) {
+      this.setState({
+        movieError: true,
+        showImages: false,
+        movieErrorMessage: `A Movie Error Occurred: ${error.response.status}, ${error.response.data}`
+      })
+    }
+  }
+
+
+
+
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.city.value);
+    this.setState({
+      city: event.target.city.value
+
+    }, this.getCityData )
+
   }
 
 
   render() {
+    console.log(this.state);
     return (
       <>
         <h1> API CALLS</h1>
 
-        <Form onSubmit={this.getCityWeather}>
+        {/* <Form onSubmit={this.getCityWeather}>
           <Form.Label> Enter In A City:</Form.Label>
-          <Form.Control type="text" onChange={this.handleCityInput} />
+          <Form.Control type="text" />
           <Button variant="success" type="submit">Explore!</Button>
-        </Form>
+        </Form> */}
+
+        <form onSubmit={this.handleSubmit}>
+
+          <input type="text" placeholder="city name" name="city"></input>
+          <button type="submit">Explore!</button>
+
+        </form>
+
 
         <Weather cityWeather={this.state.cityWeather} />
+        {/* <Movies movieData={this.state.movieData}/> */}
 
         {
           this.state.error
