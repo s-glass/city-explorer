@@ -7,6 +7,7 @@ import './App.css';
 import Weather from "./Weather";
 import Movies from "./Movies";
 // import LatLon from "./LatLon";
+// import WeatherDay from "./WeatherDay";
 
 
 class App extends React.Component {
