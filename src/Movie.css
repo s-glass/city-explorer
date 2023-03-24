@@ -15,3 +15,8 @@
   flex-wrap: wrap !important;
 }
 
+.flex-fill {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+

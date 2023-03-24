@@ -15,11 +15,22 @@ p{
   color: rgb(9, 22, 78) !important;
 }
 
-image{
+/* image{
   margin-left: auto;
   margin-right: auto;
   justify-content: center !important;
   display: flex !important;
   flex-wrap: wrap;
 }
+ */
 
+ .flex-fill {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.cards {
+  display: flex !important;
+  flex: wrap !important;
+  justify-content: space-evenly !important;
+}
