@@ -1,5 +1,6 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
+// import Card from 'react-bootstrap/Card';
+import Movie from './Movie';
 
 
 class Movies extends React.Component {
@@ -7,24 +8,7 @@ class Movies extends React.Component {
     console.log(this.props);
     return (
       <>
-        {
-          this.props.movieData.map((movie, idx) => {
-            return (
-              <Card key={idx} style={{ width: '18rem' }}>
-                <Card.Img
-                  src={movie.image}
-                  alt={movie.title}
-                />
-                <Card.Body className='card-caption'>
-                  <Card.Title>{movie.title}</Card.Title>
-                  <Card.Text>
-                    <p className='card-text'>{movie.overview}</p>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            )
-          })
-        }
+        <section>{this.props.movieData.map(movie => <Movie movie={movie}/>)}</section>
       </>
     )
   }
